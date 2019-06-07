@@ -1,0 +1,19 @@
+, '" . $_POST['text'] . "'
+
+<form action="postprov.php" method="POST">
+	<input name="text">
+	<button type="submit" class="btn btn-primary">Сделать пост</button>
+</form>
+	<div class="logo"><?php echo $res['logo']; ?></div>
+ 	<div class="name"><?php echo $res['name']; ?></div>
+ 	<div class="nick"><?php echo $res['nick']; ?></div>
+ 	
+<?php for ($i=0; $i <$query->num_rows; $i++) { 
+ 	$res = $query->fetch_assoc();?>
+ 	<a href="#"><?php echo '<img src="' . $res['img'] .  '" class="w-100">'; ?></a>
+ 	<div><?php  echo  $res['text']; ?></</div>
+ <?php } ?>
+
+ <div class="col-3">
+		<img src="images/avatar.png" class="rounded-circle" style="height: 50px; width: 50px">
+	</div>

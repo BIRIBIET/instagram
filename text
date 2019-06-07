@@ -1,0 +1,54 @@
+<?php $con = mysqli_connect('127.0.0.1', 'root', '', 'sasha_1');
+	$query = mysqli_query($con, "SELECT * FROM  gamestore ORDER BY id DESC"); ?>
+ <div></div>
+ <form method="POST" action="add.php">
+ 	<h5>Добавить товар</h5>
+ 	<input type="" name="name" placeholder="Наименование товара">
+ 	<input type="" name="logo" placeholder="Иллюстрация">
+ 	<input type="" name="price" placeholder="Цена">
+ 	<button>Добавить</button>	
+ </form>
+ <?php for ($i=0; $i <$query->num_rows; $i++) { 
+ 	$res = $query->fetch_assoc();?>
+ 	<div class="logo"><?php echo $res['logo']; ?></div>
+ 	<div class="name"><?php echo $res['name']; ?></div>
+ 	<div class="price"><?php echo $res['price'] . ' рублей'; ?></div>;
+ 	<form method="POST" action="DEL.php">
+ 		<input type="" name="id">
+ 		<button>Удалить</button>
+ 	</form>
+ <?php } ?>
+
+ <form action="send.php" method="post">
+	<input type="text" name="fio" placeholder="Укажите ФИО">
+	<input type="text" name="email" placeholder="Укажите e-mail">
+	<input type="submit" value="Отправить">
+
+
+	<input name="name" placeholder="Имя и фамилия:" style="margin-bottom: 6px; width: 280px">
+					<input name="nick" placeholder="Имя пользователя:" style="margin-bottom: 6px; width: 280px">
+					<input name="pass" type="password" placeholder="Пароль:" style="margin-bottom: 6px; width: 280px">
+
+
+					style="height: 2px; 
+								width: 100px;
+					 			background: #cbcccb;
+					 			position: absolute;
+					 			top: 45px;
+					 			left: 150px"
+
+					 			<?php 
+		if ( !empty($_REQUEST['pass']) and !empty($_REQUEST['email']) ) {
+			$email = $_REQUEST['email']; 
+			$pass = $_REQUEST['pass']; 
+			$query = 'SELECT*FROM instagram WHERE email="'.$email.'" AND pass="'.$pass.'"';
+			$result = mysqli_query($link, $query);
+			$user = mysqli_fetch_assoc($result);
+			if (!empty($user)) {
+				session_start();
+				$_SESSION['auth'] = true;
+				$_SESSION['id'] = $user['id']; 
+				$_SESSION['email'] = $user['email'];
+			}
+		}
+		 ?>
